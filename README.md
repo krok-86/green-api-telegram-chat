@@ -1,75 +1,103 @@
-# React + TypeScript + Vite
+# Telegram Chat — GREEN-API
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Тестовое задание на позицию Frontend Developer React.
 
-Currently, two official plugins are available:
+Простое веб-приложение для отправки и получения текстовых сообщений в Telegram через GREEN-API.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Возможности
 
-## React Compiler
+- подключение к GREEN-API Telegram instance;
+- ввод `apiUrl`, `idInstance` и `apiTokenInstance`;
+- проверка получателя через CheckAccount;
+- открытие чата с найденным пользователем;
+- отправка текстовых сообщений;
+- получение входящих сообщений через HTTP API polling;
+- удаление обработанных уведомлений через DeleteNotification;
+- отображение входящих и исходящих сообщений;
+- обработка ошибок API.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Стек
 
-## Expanding the ESLint configuration
+- React
+- TypeScript
+- Vite
+- Axios
+- GREEN-API
+- ESLint
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## Запуск проекта
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+Требуется Node.js 20+.
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+Установите зависимости:
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+npm install
 
-```
+Запустите development server:
 
-You can also install [eslint-plugin-react-x](https://npmx.dev/package/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://npmx.dev/package/eslint-plugin-react-dom) for React-specific lint rules:
+npm run dev
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+После запуска приложение будет доступно по адресу:
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+http://localhost:5173
+Сборка
 
-```
+Для production-сборки:
+
+npm run build
+Использование
+Создайте и авторизуйте Telegram instance в GREEN-API.
+Введите в приложении:
+apiUrl
+idInstance
+apiTokenInstance
+номер телефона получателя
+Нажмите «Открыть чат».
+После проверки пользователя можно отправлять текстовые сообщения.
+Входящие сообщения автоматически появляются в чате.
+Работа с GREEN-API
+
+Приложение использует следующие API-методы:
+
+CheckAccount — проверка существования Telegram-пользователя;
+SendMessage — отправка текстовых сообщений;
+ReceiveNotification — получение входящих уведомлений;
+DeleteNotification — удаление обработанных уведомлений.
+
+Получение сообщений реализовано через HTTP API polling без использования собственного backend или webhook-сервера.
+
+Архитектура
+
+Основная логика разделена на:
+
+src/api — работа с GREEN-API;
+src/hooks — состояние чата и polling;
+src/components — UI-компоненты;
+src/types — TypeScript-типы API и данных чата.
+Безопасность
+
+Credentials GREEN-API не хранятся в исходном коде проекта и не должны добавляться в Git.
+
+Для работы приложения используйте собственные credentials GREEN-API.
+
+apiTokenInstance является секретным значением и не должен публиковаться в репозитории.
+
+Ограничения
+
+В рамках тестового задания поддерживаются только текстовые сообщения.
+
+Не поддерживаются:
+
+изображения;
+файлы;
+видео;
+голосовые сообщения;
+стикеры;
+группы;
+другие типы сообщений Telegram.
+Автор
+
+Konstantin Bykadorov
+
+Frontend Developer / React / TypeScript
